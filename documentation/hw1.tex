@@ -1,0 +1,154 @@
+\NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
+[1994/12/01]% LaTeX date must December 1994 or later
+\documentclass[6pt]{article}
+\pagestyle{headings}
+\setlength{\textwidth}{18cm}
+\setlength{\topmargin}{0in}
+\setlength{\headsep}{0in}
+
+\title{Introduction to PDEs, Fall 2024}
+\author{\textbf{Homework 1} Due Sep 26}
+\date{}
+
+\voffset -2cm \hoffset -1.5cm \textwidth 16cm \textheight 24cm
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{esint}
+  \usepackage{paralist}
+  \usepackage{graphics} %% add this and next lines if pictures should be in esp format
+  \usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{epstopdf}%This is to transfer .eps figure to .pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
+ \usepackage[colorlinks=true]{hyperref}
+ \usepackage{multirow}
+\input{amssym.tex}
+\def\N{{\Bbb N}}
+\def\Z{{\Bbb Z}}
+\def\Q{{\Bbb Q}}
+\def\R{{\Bbb R}}
+\def\C{{\Bbb C}}
+\def\SS{{\Bbb S}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+%\newtheorem*{main}{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{solution}{Solution}
+%\newtheorem{proof}{Proof}
+ \numberwithin{equation}{section}
+%\newtheorem*{problem}{Problem}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}{Remark}
+%\newtheorem*{notation}{Notation}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}[1]{{#1}_{\varepsilon}}
+\newcommand{\keywords}
+
+
+\def\bb{\begin}
+\def\bc{\begin{center}}       \def\ec{\end{center}}
+\def\ba{\begin{array}}        \def\ea{\end{array}}
+\def\be{\begin{equation}}     \def\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}    \def\eea{\end{eqnarray}}
+\def\beaa{\begin{eqnarray*}}  \def\eeaa{\end{eqnarray*}}
+\def\hh{\!\!\!\!}             \def\EM{\hh &   &\hh}
+\def\EQ{\hh & = & \hh}        \def\EE{\hh & \equiv & \hh}
+\def\LE{\hh & \le & \hh}      \def\GE{\hh & \ge & \hh}
+\def\LT{\hh & < & \hh}        \def\GT{\hh & > & \hh}
+\def\NE{\hh & \ne & \hh}      \def\AND#1{\hh & #1 & \hh}
+
+\def\r{\right}
+\def\lf{\left}
+\def\hs{\hspace{0.5cm}}
+\def\dint{\displaystyle\int}
+\def\dlim{\displaystyle\lim}
+\def\dsup{\displaystyle\sup}
+\def\dmin{\displaystyle\min}
+\def\dmax{\displaystyle\max}
+\def\dinf{\displaystyle\inf}
+
+\def\al{\alpha}               \def\bt{\beta}
+\def\ep{\varepsilon}
+\def\la{\lambda}              \def\vp{\varphi}
+\def\da{\delta}               \def\th{\theta}
+\def\vth{\vartheta}           \def\nn{\nonumber}
+\def\oo{\infty}
+\def\dd{\cdots}               \def\pa{\partial}
+\def\q{\quad}                 \def\qq{\qquad}
+\def\dx{{\dot x}}             \def\ddx{{\ddot x}}
+\def\f{\frac}                 \def\fa{\forall\,}
+\def\z{\left}                 \def\y{\right}
+\def\w{\omega}                \def\bs{\backslash}
+\def\ga{\gamma}               \def\si{\sigma}
+\def\iint{\int\!\!\!\!\int}
+\def\dfrac#1#2{\frac{\displaystyle {#1}}{\displaystyle {#2}}}
+\def\mathbb{\Bbb}
+\def\bl{\Bigl}
+\def\br{\Bigr}
+\def\Real{\R}
+\def\Proof{\noindent{\bf Proof}\quad}
+\def\qed{\hfill$\square$\smallskip}
+
+\begin{document}
+\maketitle
+
+\textbf{Name}:\rule{1 in}{0.001 in} \\
+\begin{enumerate}
+
+\item Let us revisit the random walk.  Consider the discrete model of the random walk and assume for the sake of simplicity that $\Delta x=\Delta t=1$.  Then we know that the discrete equation over the whole grid is
+\begin{equation}\label{discrete}
+u(x,t+1)=\frac{1}{2}\big(u(x-1,t)+u(x+1,t)\big), x=\pm 1,\pm2, \pm3,..., t=0,1,2,...
+\end{equation}
+Suppose we start by placing a number of $(4-x^2)^+$ particles at location $x$, where ``$+$'' means the positive part, i.e., $\max\{\cdot,0\}$.  That is, the initial data are given such that $u(x,0)=4-x^2$ for $|x|\leq2$ and $u(x,0)\equiv0$ for $|x|\geq2$.
+
+For example, consider $u(\pm3,t)$ at time $t=2$.  It is easy to see that we need the values of $u(\pm4,1)$, which in turn require the values of $u(\pm 5,0)$.  Similarly, you go back to $u(\pm6,0)$ to evaluate $u(\pm3,3)$.  Some of you may have recognized the mechanism/scheme as a binomial tree, while I hope this gives you some intuition that the particles moving locally (by only one step) to their neighbors at each time will eventually spread out over the whole region (we will see later in this course that the speed is infinite when $\Delta x\rightarrow 0^+$).  Or you can imagine that $u$ is the number of infected living organisms, and the disease will eventually dominate the whole space if it spreads randomly.
+
+(i) plot $u(x,t)$ for $x=\pm3,\pm2,\pm1,0$ at time $t=0,1,...,6$, and connect the neighbouring dots with straight lines;
+
+(ii) Now set $\Delta x=\Delta t=0.5$ and plot $u(x,t)$ for $x=\pm3,\pm 2.5,\pm2,\pm 1.5,\pm1.0$ at time $t=0,1,...,6$. I suggest that you use MATLAB or other computational software to do the calculations.  Now you see, the discrete problem is, to be frank, simple but computationally tedious; do the same for $\Delta x=\Delta t=0.01$.  It gets tedious with your bare hands, but not if you use a computer program.  1) This is why it makes good sense to study the continuous case, which approximates the discrete case when $\Delta x$ and $\Delta t$ are small; 2) now you have just learnt the finite difference method of solving the heat equation without even realizing it;
+
+(iii) Now let us return to the same problem with $\Delta x=\Delta t=1$ and the same initial condition $u(x,0)=(4-x^2)^+$, but now over the finite interval $(-5,5)$.  We are well set for $u(x,1)$ at all $x$ except $x=\pm 5$, because $x=\pm6$ is not considered in this finite interval.  Therefore, we need to set special conditions for $u(\pm5,t)$ for some time $t$ in order to calculate $u(\pm4,t+1)$, and so on.  This condition is called a boundary condition and must be set for any PDE over a finite interval.  One type is the so-called Dirichlet boundary condition for which we set $u(\pm5,t)=0$ (or some other constant) for any $t>0$.  Suppose $u(\pm5,t)=0$ for all $t\geq0$. Plot $u(x,t)$ for $x=\pm5,...,\pm1,0$ at time $t=0,1,...,6$ and connect the neighboring points with straight lines.
+
+(iv)  do the same as in (iii) with $u(\pm 5,t)=2$ for any $t>0$;
+
+(v)  do the same as in (iii) with $u(-5,t)=1$ and $u(5,t)=3$ for any $t>0$.  Now you can see that different boundary conditions can have different effects on the solution's behavior;
+
+(vi)  do the same as in (iii) with $u(-5,t)=1$ and $u(5,t)=3$ for any $t>0$, but $u_0(x)=(x^2-4)^+$.  Now you can see that different initial conditions can have different effects on the solution's behavior;
+
+\textbf{Note}: You can always, for your amusement but no need to show me, set $\Delta x$ and $\Delta t$ to a different size, say $10^{-3}$, to see how the discrete solution approaches the continuum solution;
+
+\item Now let us go back to our baby example in the 1D lattice/grid: each particle at $x$ moves to either $x-\Delta x$ or $x+\Delta x$ with probability $\frac{1}{2}$, at each time $t$.  As I mentioned in class, some students may have concerns that it is unfair or unrealistic to assume that every particle only moves to $x\pm \Delta x$ at the next time step, and it is possible that, for example, the particle can move to $x\pm\Delta x$ with probability $\frac{1}{4}$, and move to $x\pm2\Delta x$ with a small probability, say $\frac{1}{8}$, and move to $x\pm3\Delta x$ with an even smaller probability, say $\frac{1}{16}$, and move to $x\pm 4\Delta x$, $x\pm 5\Delta x$. ... and so on, with all probabilities adding up to 1.  I have no objection to this possibility! However, this problem is designed to show that this case also leads to the classical heat equation, with only a variation in the diffusion rate.  To simplify our mathematical analysis, and without losing our generality, let us assume that each particle can only move to $x\pm\Delta x$, $x\pm 2\Delta x$, with probability
+\[p(x\rightarrow x\pm\Delta x,t)=\frac{\alpha}{2}, p(x\rightarrow x\pm2\Delta x,t)=\frac{1-\alpha}{2},\]
+so that $p(x\rightarrow x\pm3\Delta x,t)=p(x\rightarrow x\pm4\Delta x,t)=...=0$.   Derive the PDE for $u(x,t)$ using the microscopic approach.
+
+ 
+
+\item Assume that each particle can also move along the diagonal, so that $p((x,y)\rightarrow (x\pm\Delta x,y),t)=p((x,y)\rightarrow (x,y\pm\Delta y),t)=\alpha$ and $p((x,y)\rightarrow (x\pm\Delta x,y\pm\Delta y),t)=1/4-\alpha$, $\alpha\in(0,1/4)$.  Derive the PDE.
+
+
+\item Denote $u_n(x,t):=e^{-D(\frac{n\pi}{L})^2t} \sin \frac{n\pi x}{L}$.
+
+i) show that, by formal calculation, for each $N<\infty$, the series $\sum_{n=1}^N c_nu_n(x,t)$ is a solution of the following baby heat equation
+\[\frac{\partial u}{\partial t}=D\frac{\partial^2 u}{\partial x^2},\]
+where $c_n$ are constants.  Note: The series is also a solution for $N=\infty$ as long as it converges, and we will discuss it later in this course;
+
+ii) Assume that $L=\pi$ and $D=0.05$.  Use MATLAB or other software to plot $u_1(x,t)$ over $x\in(0,\pi)$ with $t=0$, $t=0.5$, $t=2$ in the same coordinate.  Do the same for $D=0.1$ and $D=1$.  What are your observations and explain them intuitively;
+
+iii) Again for $D=1$, use MATLAB or other software to plot $1u_1(x,t)+0.5u_2(x,t)$ over $x\in(0,\pi)$ with $t=0$, $t=0.5$, $t=2$ in the same coordinate;
+ 
+
+
+\item  Go to review the following topics: gradient; directional derivative; multivariate integral; surface integral; divergence theorem.  No need to turn in your review.
+
+\end{enumerate}
+
+
+\end{document}
+\endinput
