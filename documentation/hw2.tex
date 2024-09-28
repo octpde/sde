@@ -1,0 +1,159 @@
+\NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
+[1994/12/01]% LaTeX date must December 1994 or later
+\documentclass[6pt]{article}
+\pagestyle{headings}
+\setlength{\textwidth}{18cm}
+\setlength{\topmargin}{0in}
+\setlength{\headsep}{0in}
+
+\title{Introduction to PDEs, Fall 2024}
+\author{\textbf{Homework 2} Due Oct 12}
+\date{}
+
+\voffset -2cm \hoffset -1.5cm \textwidth 16cm \textheight 24cm
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{esint}
+  \usepackage{paralist}
+  \usepackage{graphics} %% add this and next lines if pictures should be in esp format
+  \usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{epstopdf}%This is to transfer .eps figure to .pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
+ \usepackage[colorlinks=true]{hyperref}
+ \usepackage{multirow}
+\input{amssym.tex}
+\def\N{{\Bbb N}}
+\def\Z{{\Bbb Z}}
+\def\Q{{\Bbb Q}}
+\def\R{{\Bbb R}}
+\def\C{{\Bbb C}}
+\def\SS{{\Bbb S}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+%\newtheorem*{main}{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{solution}{Solution}
+%\newtheorem{proof}{Proof}
+ \numberwithin{equation}{section}
+%\newtheorem*{problem}{Problem}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}{Remark}
+%\newtheorem*{notation}{Notation}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}[1]{{#1}_{\varepsilon}}
+\newcommand{\keywords}
+
+
+\def\bb{\begin}
+\def\bc{\begin{center}}       \def\ec{\end{center}}
+\def\ba{\begin{array}}        \def\ea{\end{array}}
+\def\be{\begin{equation}}     \def\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}    \def\eea{\end{eqnarray}}
+\def\beaa{\begin{eqnarray*}}  \def\eeaa{\end{eqnarray*}}
+\def\hh{\!\!\!\!}             \def\EM{\hh &   &\hh}
+\def\EQ{\hh & = & \hh}        \def\EE{\hh & \equiv & \hh}
+\def\LE{\hh & \le & \hh}      \def\GE{\hh & \ge & \hh}
+\def\LT{\hh & < & \hh}        \def\GT{\hh & > & \hh}
+\def\NE{\hh & \ne & \hh}      \def\AND#1{\hh & #1 & \hh}
+
+\def\r{\right}
+\def\lf{\left}
+\def\hs{\hspace{0.5cm}}
+\def\dint{\displaystyle\int}
+\def\dlim{\displaystyle\lim}
+\def\dsup{\displaystyle\sup}
+\def\dmin{\displaystyle\min}
+\def\dmax{\displaystyle\max}
+\def\dinf{\displaystyle\inf}
+
+\def\al{\alpha}               \def\bt{\beta}
+\def\ep{\varepsilon}
+\def\la{\lambda}              \def\vp{\varphi}
+\def\da{\delta}               \def\th{\theta}
+\def\vth{\vartheta}           \def\nn{\nonumber}
+\def\oo{\infty}
+\def\dd{\cdots}               \def\pa{\partial}
+\def\q{\quad}                 \def\qq{\qquad}
+\def\dx{{\dot x}}             \def\ddx{{\ddot x}}
+\def\f{\frac}                 \def\fa{\forall\,}
+\def\z{\left}                 \def\y{\right}
+\def\w{\omega}                \def\bs{\backslash}
+\def\ga{\gamma}               \def\si{\sigma}
+\def\iint{\int\!\!\!\!\int}
+\def\dfrac#1#2{\frac{\displaystyle {#1}}{\displaystyle {#2}}}
+\def\mathbb{\Bbb}
+\def\bl{\Bigl}
+\def\br{\Bigr}
+\def\Real{\R}
+\def\Proof{\noindent{\bf Proof}\quad}
+\def\qed{\hfill$\square$\smallskip}
+
+\begin{document}
+\maketitle
+
+\textbf{Name}:\rule{1 in}{0.001 in} \\
+\begin{enumerate}
+
+\item Suppose that $u(x,t)$ moves to $x\pm\Delta x$  at any time $t$ with a probability $p$ which depends location $x$ but not time, i.e.,
+\[p(x\rightarrow x\pm\Delta x,t)=\rho(x)\]
+Put $D=\frac{\Delta x^2}{\Delta t}$ as $\Delta t \rightarrow 0^+$.  Derive the PDE for $u(x,t)$.  What if the probability also depends on time, i.e.,
+\[p(x\rightarrow x\pm\Delta x,t)=\rho(x,t)\]
+or
+\[p(x\rightarrow x\pm\Delta x,t)=\rho(x,t+\Delta t).\]
+
+
+\item  Now change the probability above as arrival--dependent, i.e.,
+\[p(x\rightarrow x\pm\Delta x,t)=\rho(x\pm\Delta x).\]
+Derive the PDE for $u(x,t)$.  Is the PDE the same as the one above?  Compare them and state your observations.
+
+\item  Let us now consider heat diffusion in an inhomogeneous material in $\mathbb R^3$.  That is, the density $\rho(x)$ ($gram/cm.^3$), the heat capacity $c(x)$ ($calorie/gram.degree$), and the thermal conductivity $\kappa(x)$ ($calorie/cm.degree.second$) are all functions of $x$.  Let $u(x,t)$ be the temperature at location $x$ and time $t$.  Show that the equation for such a heat flow is
+\begin{equation}\label{1}
+c(x)\rho(x) \frac{\partial u}{\partial t}=\nabla \cdot\big (\kappa(x) \nabla u\big),
+\end{equation}
+You must present your justifications in a logically well-ordered way.   
+
+\item
+Perform straightforward calculations to verify that
+\begin{equation*}
+\int_0^L \sin \frac{m\pi x}{L} \sin \frac{n\pi x}{L}=\int_0^L \cos \frac{m\pi x}{L} \cos \frac{n\pi x}{L}=\frac{L}{2}\delta_{mn}=
+\left\{
+\begin{array}{ll}
+\frac{L}{2},\text{~if~}m=n,\\
+0,\text{~if~}m\neq n;
+\end{array}
+\right.
+\end{equation*}
+here $\delta$ is the so-called Kronecker delta function.
+
+
+\item  Consider the following generalized heat equation for $m\geq1$.
+\begin{equation}\label{PME}
+u_t= \Delta (u^m),\textbf{x}\in\mathbb R^N, t\in\mathbb R^+,
+\end{equation}
+which reduces to the classical heat equation when $m=1$, and to Boussinesq's equation when $m=2$.  Note that one can rewrite $u_t=\nabla \cdot (mu^{m-1} \nabla u)$, thus recognizing the diffusion rate as $mu^{m-1}$.  This equation was proposed in the study of ideal gas flowing isentropically in a homogeneous medium, or the flow of fluid through porous media (such as oil through the soil), where instead of the Fourier law of constant diffusivity, the law $\textbf{J}=- u^{m-1}\nabla u$ is usually observed.  It is not necessary to know why this particular form was chosen, but it is not surprising to imagine that the flow of dye in water behaves differently from that of oil in soil.
+
+A fundamental solution to the problem in 1D was obtained in the 1950s by the Russian mathematician Barenblatt, where in $\mathbb R^N$, $N\geq1$, one has
+\begin{equation}\label{Barenblatt}
+u(\textbf{x},t)=t^{-\alpha}\Big(C-\kappa |\textbf{x}|^2t^{-2\beta}\Big)_+^\frac{1}{m-1},
+\end{equation}
+where
+\[(f)_+:=\max\{f,0\}, \alpha:=\frac{N}{(m-1)N+2}, \beta:=\frac{\alpha}{N}, \kappa =\frac{\alpha(m-1)}{2mN}\]
+and $C$ is an arbitrary positive constant.
+
+(1) In 1D, prove that (\ref{Barenblatt}) satisfies the PME (\ref{PME}).  You can, but are not required to, prove this in any dimension;
+
+(2) In 1D ($n=1$), choose $m=2$ and $C=10$, and then plot $u(x,t)$ for $t=1$, $2$, $5$, and $10$.You can also plot this in 2D or higher dimensions.
+
+\end{enumerate}
+
+
+\end{document}
+\endinput
