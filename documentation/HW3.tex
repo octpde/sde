@@ -1,0 +1,261 @@
+\NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
+[1994/12/01]% LaTeX date must December 1994 or later
+\documentclass[6pt]{article}
+\pagestyle{headings}
+\setlength{\textwidth}{18cm}
+\setlength{\topmargin}{0in}
+\setlength{\headsep}{0in}
+
+\title{Introduction to PDEs, Fall 2024}
+\author{\textbf{Homework 3} Due Oct 17}
+\date{}
+
+\voffset -2cm \hoffset -1.5cm \textwidth 16cm \textheight 24cm
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{refcheck}
+\usepackage{paralist}
+\usepackage{graphics} %% add this and next lines if pictures should be in esp format
+\usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{epstopdf}%This is to transfer .eps figure to .pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
+ \usepackage[colorlinks=true]{hyperref}
+ \usepackage{multirow}
+\input{amssym.tex}
+\def\N{{\Bbb N}}
+\def\Z{{\Bbb Z}}
+\def\Q{{\Bbb Q}}
+\def\R{{\Bbb R}}
+\def\C{{\Bbb C}}
+\def\SS{{\Bbb S}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+%\newtheorem*{main}{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{solution}{Solution}
+%\newtheorem{proof}{Proof}
+ \numberwithin{equation}{section}
+%\newtheorem*{problem}{Problem}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}{Remark}
+%\newtheorem*{notation}{Notation}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}[1]{{#1}_{\varepsilon}}
+\newcommand{\keywords}
+
+
+\def\bb{\begin}
+\def\bc{\begin{center}}       \def\ec{\end{center}}
+\def\ba{\begin{array}}        \def\ea{\end{array}}
+\def\be{\begin{equation}}     \def\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}    \def\eea{\end{eqnarray}}
+\def\beaa{\begin{eqnarray*}}  \def\eeaa{\end{eqnarray*}}
+\def\hh{\!\!\!\!}             \def\EM{\hh &   &\hh}
+\def\EQ{\hh & = & \hh}        \def\EE{\hh & \equiv & \hh}
+\def\LE{\hh & \le & \hh}      \def\GE{\hh & \ge & \hh}
+\def\LT{\hh & < & \hh}        \def\GT{\hh & > & \hh}
+\def\NE{\hh & \ne & \hh}      \def\AND#1{\hh & #1 & \hh}
+
+\def\r{\right}
+\def\lf{\left}
+\def\hs{\hspace{0.5cm}}
+\def\dint{\displaystyle\int}
+\def\dlim{\displaystyle\lim}
+\def\dsup{\displaystyle\sup}
+\def\dmin{\displaystyle\min}
+\def\dmax{\displaystyle\max}
+\def\dinf{\displaystyle\inf}
+
+\def\al{\alpha}               \def\bt{\beta}
+\def\ep{\varepsilon}
+\def\la{\lambda}              \def\vp{\varphi}
+\def\da{\delta}               \def\th{\theta}
+\def\vth{\vartheta}           \def\nn{\nonumber}
+\def\oo{\infty}
+\def\dd{\cdots}               \def\pa{\partial}
+\def\q{\quad}                 \def\qq{\qquad}
+\def\dx{{\dot x}}             \def\ddx{{\ddot x}}
+\def\f{\frac}                 \def\fa{\forall\,}
+\def\z{\left}                 \def\y{\right}
+\def\w{\omega}                \def\bs{\backslash}
+\def\ga{\gamma}               \def\si{\sigma}
+\def\iint{\int\!\!\!\!\int}
+\def\dfrac#1#2{\frac{\displaystyle {#1}}{\displaystyle {#2}}}
+\def\mathbb{\Bbb}
+\def\bl{\Bigl}
+\def\br{\Bigr}
+\def\Real{\R}
+\def\Proof{\noindent{\bf Proof}\quad}
+\def\qed{\hfill$\square$\smallskip}
+
+\begin{document}
+\maketitle
+
+\textbf{Name}:\rule{1 in}{0.001 in} \\
+\begin{enumerate}
+
+\item[] 
+(...continued from lecture)  Let us reconsider the following reaction-diffusion system with the Dirichlet boundary condition
+\begin{equation}\label{0}
+\left\{
+\begin{array}{ll}
+u_t=D\Delta u+f(x,t),&x\in \Omega,t>0,\\
+u(x,0)=\phi(x),&x\in \Omega,\\
+u(x,t)=\psi(x,t),&x \in \partial \Omega, t>0.
+\end{array}
+\right.
+\end{equation}
+
+Note that proving the uniqueness of \eqref{0} is equivalent to demonstrating that the following problem has only the trivial solution \( w(x,t) \equiv 0 \)
+\begin{equation}\label{00}
+\left\{
+\begin{array}{ll}
+w_t=D\Delta w,&x\in \Omega,t>0,\\
+w(x,0)=0,&x\in \Omega,\\
+w(x,t)=0,&x \in \partial \Omega, t>0.
+\end{array}
+\right.
+\end{equation}
+For this purpose, we introduced 
+\[E(t)=\int_\Omega w^2(x,t)dx, t\geq0, \]
+then we must have that from the initial condition that
+\[E(0)=0,\quad E(t)\geq 0 \quad \forall t\geq 0;\]
+Now we differentiate \( E(t) \) with respect to time \( t \) and obtain the following
+\begin{align}
+    \frac{dE(t)}{dt}  = & 2\int_\Omega w w_tdx  \quad --\text{by chain rule} \nonumber \\
+    =& 2\int _\Omega wD\Delta w dx \quad --\text{by PDE} \nonumber \\
+    =& -2 D \int_\Omega  |\nabla w|^2dx \quad --\text{by divergence theorem} \label{dv}\\
+    \leq & 0 \quad \forall t\geq0. \nonumber   
+\end{align}
+This implies that \( E(t) \) is always non-increasing over time. Since \( E(0) = 0 \) and \( E(t) \geq 0 \), we must have \( E(t) \equiv 0 \), which leads to \( w \equiv 0 \), as expected.
+
+In class, I applied \eqref{dv} without further justification, assuming you have encountered this in multivariate calculus. If that assumption was incorrect, let us recall the divergence theorem for a generic vector function \( \textbf{F} \)
+\[\int_\Omega \nabla \cdot \textbf{F}dx = \int_{\partial \Omega} \textbf{F}\cdot \textbf{n} dS.\] 
+Choose \( \textbf{F} = f \nabla g \), and use the identity \( \nabla f \cdot \nabla g + f \Delta g = \nabla \cdot (f \nabla g) \), where \( \Delta \) is the Laplacian.  We integrate both sides over \( \Omega \) and then apply the divergence theorem to obtain:
+\[\int_\Omega \nabla f\cdot \nabla g+f\Delta gdx = \int_\Omega \nabla \cdot (f\nabla g) dx = \int_{\partial\Omega}  f\nabla g \cdot \textbf{n}dS = \int_{\partial\Omega}  f\partial_\textbf{n}g dS.\]
+Note that the last identity holds only because it is an equivalent way of expressing \( \nabla g \cdot \textbf{n} \) using the directional derivative \( \partial_\textbf{n} g \) (which I assume you know). For practical purposes, we sometimes swap the two terms in the above identity and rewrite it as follows:
+\begin{equation}\label{gfi}
+\int_\Omega f\Delta gdx = \int_{\partial\Omega}  f\partial_\textbf{n}g dS - \int_\Omega \nabla f\cdot \nabla g dx,    
+\end{equation}
+and this new identity is called Green's first identity.  
+
+Finally, if we choose $f=g=w$ in \eqref{gfi}, we readily collect \eqref{dv} since 
+\[\int_\Omega w\Delta wdx = \overbrace{\int_{\partial\Omega}  w\partial_\textbf{n}w dS}^{=0 \text{~since $w\equiv 0$ on} \partial \Omega} - \int_\Omega |\nabla w|^2 dx=- \int_\Omega |\nabla w|^2 dx.\]
+I hope this has cleared up any possible confusion.
+
+
+\item 
+
+Now, use Green's first identity to show that
+ \begin{equation}\label{GS}
+\int_\Omega f \Delta g - \Delta f  gdx =\int_{\partial \Omega} f \frac{\partial g}{\partial \textbf{n}}-\frac{\partial f}{\partial \textbf{n}} gdS.
+\end{equation}
+(\ref{GS}) is called Green's second identity.  What is (\ref{GS}) when $\Omega=(a,b)$?
+ 
+
+
+\item Consider the following reaction-diffusion equation with Robin boundary condition
+\begin{equation}\label{1}
+\left\{
+\begin{array}{ll}
+u_t=D\Delta u+f(x,t),&x\in \Omega,t>0,\\
+u(x,0)=\phi(x),&x\in \Omega,\\
+\alpha u+\beta \frac{\partial u}{\partial \textbf{n}}=\psi(x,t),&x \in \partial \Omega, t>0.
+\end{array}
+\right.
+\end{equation}
+Use the energy method to:
+
+(i)  prove the uniqueness of (\ref{1}) when $\alpha=0$ and $\beta\neq 0$;
+
+(ii) prove the uniqueness when both $\alpha$ and $\beta$ are not zero.  You might need to discuss the signs of $\alpha$ and $\beta$.
+
+
+\item Let us reconsider the following reaction-diffusion system with mixed boundary condition
+\begin{equation}\label{mixed}
+\left\{
+\begin{array}{ll}
+u_t=D\Delta u+f(x,t),&x\in \Omega,t>0,\\
+u(x,0)=\phi(x),&x\in \Omega,\\
+u(x,t)=\psi_1(x,t),&x \in \partial \Omega_1, t>0,\\
+\partial_\textbf{n}u(x,t)=\psi_2(x,t),&x \in \partial \Omega_2, t>0,
+\end{array}
+\right.
+\end{equation} 
+where we used $\partial\Omega_1$ to denote part of the boundary $\Omega$ and $\partial\Omega_2$ to denote the rest part. \footnote{A possible physical scenario involves a homogeneous iron bar, with the left end submerged in iced water and the right end well insulated. Heat flows along the bar, with heat exchange occurring only at the left end, while the rest of the bar remains insulated.}
+Prove the uniqueness of \eqref{mixed}.
+
+\item   
+The term "energy" defined as 
+\[ E(t) = \int_\Omega w^2(x, t) \, dx \] 
+may not necessarily represent physical energy, such as kinetic or potential energy. However, it is referred to as "energy" because it shares many characteristics with physical energy; for example, it is always positive and increases if the temperature \( u \) rises. It is more accurately termed an "energy functional," as we discussed in class, since it is a function of functions.
+
+(i) let us define
+\[E(t):=\int_\Omega w^4(x,t)dx.\]
+Use this new energy-functional to prove the uniqueness to (\ref{0}).
+
+(iii)  can you use $E(t):=\int_\Omega w^3(x,t)dx$ for this purpose? 
+
+
+\item In general, one cannot apply energy methods to problems where \( f = f(x, t, u) \); indeed, many such problems may have more than one solution. However, these methods are effective for problems with special reaction terms \( f \). It is important to note that \( f \) is referred to as a "reaction" term because heat is produced through **chemical reactions**, which is why the heat equation is sometimes called the reaction-diffusion equation in other contexts.
+
+(i).  Use energy method to prove uniqueness to the following problem
+\begin{equation}\label{decay}
+\left\{
+\begin{array}{ll}
+u_t=D\Delta u-u,&x\in \Omega,t>0,\\
+u(x,0)=\phi(x),&x\in \Omega,\\
+u(x,t)=\psi(x,t),&x \in \partial \Omega, t>0.
+\end{array}
+\right.
+\end{equation}
+
+(ii).  Suppose that $f'$ is of one sign (you should determine what the sign it should be).  Prove uniqueness for following problem with $f=f(u)$ dependent only on $u$
+\begin{equation}\label{nonlinear}
+\left\{
+\begin{array}{ll}
+u_t=D\Delta u+f(u),&x\in \Omega,t>0,\\
+u(x,0)=\phi(x),&x\in \Omega,\\
+u(x,t)=\psi(x,t),&x \in \partial \Omega, t>0.
+\end{array}
+\right.
+\end{equation}
+For what conditions (on $f$) do you have the uniqueness of (\ref{nonlinear})?  Hint: according to intermediate value theorem, $f(u_1)-f(u_2)=f'(u_1+\theta (u_2-u_1))(u_1-u_2)$ for some $\theta\in[0,1]$.  Therefore you may work on the integral if $f'$ is of one sign.  Remark: you should see that it also works even if $f=f(x,t,u)$, while I skip $x$ and $t$ with loss of generality.
+
+(iii)  (Only for motivated students) Assume that $f$ is Lipschitz continuous, i.e., there exists a positive constant $L$ such that $|f(u_1)-f(u_2)|\leq L |u_1-u_2|$ for any $u_1,u_2$.  Prove the uniqueness of \eqref{nonlinear}.  Hint: you may arrive at an ordinary differential inequality.  Solve that inequality. 
+
+ 
+
+\vspace{0.2in}\item  
+The energy method can also be applied to problems of various forms. For example, consider the following initial boundary value problem (a wave equation; you do not need to know anything about it at this moment):
+\begin{equation}\label{wave}
+\left\{
+\begin{array}{ll}
+u_{tt}=D\Delta u+f(x,t),&x\in \Omega,t\in\mathbb R^+,\\
+u(x,0)=\phi(x),&x\in \Omega,\\
+u_t(x,0)=h(x),&x \in \partial \Omega, t\in\mathbb R^+.
+\end{array}
+\right.
+\end{equation}
+Use the energy-functional
+\[E(t):=\frac{1}{2}\int_\Omega w_t^2(x,t)+|\nabla w(x,t)|^2 dx\]
+to prove the uniqueness of (\ref{wave}).  Justify each step of your argument rigorously.
+ 
+
+ 
+ 
+
+
+\end{enumerate}
+
+
+\end{document}
+\endinput
