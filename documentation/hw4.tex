@@ -1,0 +1,188 @@
+\NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
+[1994/12/01]% LaTeX date must December 1994 or later
+\documentclass[6pt]{article}
+\pagestyle{headings}
+\setlength{\textwidth}{18cm}
+\setlength{\topmargin}{0in}
+\setlength{\headsep}{0in}
+
+\title{Introduction to PDEs, Fall 2024}
+\author{\textbf{Homework 4} Due Oct 31}
+\date{}
+
+\voffset -2cm \hoffset -1.5cm \textwidth 16cm \textheight 24cm
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{refcheck}
+\usepackage{paralist}
+\usepackage{graphics} %% add this and next lines if pictures should be in esp format
+\usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{epstopdf}%This is to transfer .eps figure to .pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
+ \usepackage[colorlinks=true]{hyperref}
+ \usepackage{multirow}
+\input{amssym.tex}
+\def\N{{\Bbb N}}
+\def\Z{{\Bbb Z}}
+\def\Q{{\Bbb Q}}
+\def\R{{\Bbb R}}
+\def\C{{\Bbb C}}
+\def\SS{{\Bbb S}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+%\newtheorem*{main}{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{solution}{Solution}
+%\newtheorem{proof}{Proof}
+ \numberwithin{equation}{section}
+%\newtheorem*{problem}{Problem}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}{Remark}
+%\newtheorem*{notation}{Notation}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\eps}[1]{{#1}_{\varepsilon}}
+\newcommand{\keywords}
+
+
+\def\bb{\begin}
+\def\bc{\begin{center}}       \def\ec{\end{center}}
+\def\ba{\begin{array}}        \def\ea{\end{array}}
+\def\be{\begin{equation}}     \def\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}    \def\eea{\end{eqnarray}}
+\def\beaa{\begin{eqnarray*}}  \def\eeaa{\end{eqnarray*}}
+\def\hh{\!\!\!\!}             \def\EM{\hh &   &\hh}
+\def\EQ{\hh & = & \hh}        \def\EE{\hh & \equiv & \hh}
+\def\LE{\hh & \le & \hh}      \def\GE{\hh & \ge & \hh}
+\def\LT{\hh & < & \hh}        \def\GT{\hh & > & \hh}
+\def\NE{\hh & \ne & \hh}      \def\AND#1{\hh & #1 & \hh}
+
+\def\r{\right}
+\def\lf{\left}
+\def\hs{\hspace{0.5cm}}
+\def\dint{\displaystyle\int}
+\def\dlim{\displaystyle\lim}
+\def\dsup{\displaystyle\sup}
+\def\dmin{\displaystyle\min}
+\def\dmax{\displaystyle\max}
+\def\dinf{\displaystyle\inf}
+
+\def\al{\alpha}               \def\bt{\beta}
+\def\ep{\varepsilon}
+\def\la{\lambda}              \def\vp{\varphi}
+\def\da{\delta}               \def\th{\theta}
+\def\vth{\vartheta}           \def\nn{\nonumber}
+\def\oo{\infty}
+\def\dd{\cdots}               \def\pa{\partial}
+\def\q{\quad}                 \def\qq{\qquad}
+\def\dx{{\dot x}}             \def\ddx{{\ddot x}}
+\def\f{\frac}                 \def\fa{\forall\,}
+\def\z{\left}                 \def\y{\right}
+\def\w{\omega}                \def\bs{\backslash}
+\def\ga{\gamma}               \def\si{\sigma}
+\def\iint{\int\!\!\!\!\int}
+\def\dfrac#1#2{\frac{\displaystyle {#1}}{\displaystyle {#2}}}
+\def\mathbb{\Bbb}
+\def\bl{\Bigl}
+\def\br{\Bigr}
+\def\Real{\R}
+\def\Proof{\noindent{\bf Proof}\quad}
+\def\qed{\hfill$\square$\smallskip}
+
+\begin{document}
+\maketitle
+
+\textbf{Name}:\rule{1 in}{0.001 in} \\
+\begin{enumerate}
+
+
+\item
+We have shown that only a pair of the form $(X_k,\lambda_k)=\Big(\sin \frac{k\pi  x}{L}, \big(\frac{k\pi  }{L}\big)^2\Big)$, $k\in\mathbb N$, can satisfy the associated problem (I have changed the sign without confusing you)
+\begin{equation}\label{EPDBC}
+\left\{
+\begin{array}{ll}
+X''+\lambda X=0, x\in (0,L),\\
+X(0)=X(L)=0.
+\end{array}
+\right.
+\end{equation}
+First, it is evident that \( CX_k \) is also a solution to (\ref{EPDBC}) for any \( C \in \mathbb{R} \). However, by convention, we typically choose \( C = 1 \) and write \( X_k = \sin \left( \frac{k\pi x}{L} \right) \). Alternatively, we sometimes use its normalized form, \( X_k = \sqrt{\frac{2}{L}} \sin \left( \frac{k\pi x}{L} \right) \), since it satisfies \( \| X_k \|_{L^2(0, L)} = 1 \). That being said, it is the shape of \( \sin \) that matters, not its magnitude, at least for (\ref{EPDBC}).
+
+
+Second, (\ref{EPDBC}) is referred to as an eigenvalue problem, where \( (X_k, \lambda_k) \) is called an eigen-pair, drawing an analogy to eigenvectors and eigenvalues in linear algebra. Let us briefly recall the following from linear algebra: for an \( n \times n \) matrix \( A \), we refer to \( (\mathbf{x}, \lambda) \) as its eigen-pair, where \( \mathbf{x} \) (nonzero) is the eigenvector and \( \lambda \) is the eigenvalue, provided that \( A \mathbf{x} = \lambda \mathbf{x} \) holds (with \( \lambda = 0 \) being allowed).  As you may already know, in linear algebra, if \( \mathbf{x} \) is an eigenvector, then \( C \mathbf{x} \) is also an eigenvector, which further motivates why we select \( C = 1 \) in the earlier discussion.  For (\ref{EPDBC}), we can formally treat \( -\frac{d^2}{dx^2} \) as \( A \), and express it as \( AX = \lambda X \). However, unlike the finite-dimensional case, the eigenspace \( \{X_k\} \), consisting of all such eigenfunctions, is infinite-dimensional, since \( X_k \) is an element for each \( k \in \mathbb{N} \). This starkly contrasts with linear algebra, where the eigenspace of an \( n \times n \) matrix is at most \( n \)-dimensional.
+
+
+Moreover, it is well known that if an \( n \times n \) matrix \( A \) is invertible, its eigenvectors form a basis of \( \mathbb{R}^n \) (you may want to review this if you’re unfamiliar). In a similar manner, as we will see in upcoming lectures, the eigenfunctions of \( -\frac{d^2}{dx^2} \) (or, equivalently, the solutions to the eigenvalue problem (\ref{EPDBC})) \( \{X_k\}_{k \in \mathbb{N}} \) form a basis of \( L^2(0, L) \) with Dirichlet boundary conditions, i.e., the space of square-integrable functions with Dirichlet boundary conditions. This result is a key aspect of Sturm--Louville's theory, one of the cornerstones in the study of differential equations. We will explore this topic further in class.  In general, the study of many PDE problems often boils down to investigating eigenvalue problems, some of which are far more complex than (\ref{EPDBC}). Nonetheless, we can begin by examining problems closely related to (\ref{EPDBC}).
+
+
+Find eigenpairs $\{(X_k, \lambda_k)\}$ to the following eigenvalue problems
+\begin{equation}\label{ep2}
+\left\{
+\begin{array}{ll}
+X''+\lambda X=0, x\in (0,L),\\
+X'(0)=X'(L)=0;
+\end{array}
+\right.
+\end{equation}
+
+\begin{equation}\label{ep3}
+\left\{
+\begin{array}{ll}
+X''+\lambda X=0, x\in (0,L),\\
+X(0)=X'(L)=0;
+\end{array}
+\right.
+\end{equation}
+and
+\begin{equation}\label{ep4}
+\left\{
+\begin{array}{ll}
+X''+\lambda X=0, x\in (0,L),\\
+X'(0)=X(L)=0;
+\end{array}
+\right.
+\end{equation}
+
+\item
+
+
+Let us return to \( L^2(0, L) \), the space of square-integrable functions. More generally, for \( p \in (1, \infty) \), the \( L^p \) space is defined as
+\[L^p(\Omega) := \left\{ f(x) \, \middle| \, \int_\Omega |f(x)|^p dx < \infty \right\}.\]
+There are additional conditions, such as requiring \( \Omega \) and \( f \) to be measurable, but I will omit those here to avoid overwhelming you for now.  Moreover, we can define the \textbf{length}, or the so-called \textbf{norm}, of any function \( f \in L^p \) as
+\[\| f \|_{L^p(\Omega)} := \left( \int_\Omega |f(x)|^p dx \right)^{\frac{1}{p}}.\]
+
+Now, find:
+(a) \( \| f(x) \|_{L^2(0,1)} \) for \( f(x) = e^x \), and   (b) \( \| f(x) \|_{L^2(0,2)} \) for \( f(x) = x - 1 \).
+
+
+\item We demonstrated that \( f(x) = \frac{1}{\sqrt{x}} \in L^1(0,1) \), but not in \( L^2(0,1) \). What would be the general conditions for a function of the form \( f(x) = x^\alpha \) to belong to \( L^p(0,1) \), but not \( L^q(0,1) \), assuming \( p, q \in (1, \infty) \) for simplicity?
+
+
+
+\item
+
+The orthogonality of functions is a generalization of the concept of vector orthogonality, with inner products between vectors replaced by inner products of functions. This idea can be further extended as follows: suppose \( w(x) \) is a nonnegative function on \( [a, b] \). Let \( f(x) \) and \( g(x) \) be real-valued functions, and define their inner product on \( [a, b] \) with respect to the weight \( w \) as
+\[\langle f, g \rangle = \int_a^b f(x) g(x) w(x) \, dx.\]
+We say that \( f \) and \( g \) are orthogonal on \( [a, b] \) with respect to the weight \( w \) if \( \langle f, g \rangle = 0 \).
+
+Show that the functions
+\[f_0(x) = 1, \quad f_1(x) = 2x, \quad f_2(x) = 4x^2 - 1, \quad f_3(x) = 8x^3 - 4x\]
+are pairwise orthogonal on \( [-1, 1] \) relative to the weight function \( w(x) = \sqrt{1 - x^2} \).  These functions are examples of the so-called \textit{Chebyshev polynomials of the second kind}. Indeed, you can find that \( f_4(x) = 16x^4 - 12x^2 + 1 \) and \( f_5(x) = 32x^5 - 32x^3 + 6x \) (you are not required to verify this).
+
+Plot all the functions \( f_i(x) \), \( i = 0, 1, \ldots, 5 \), on the same coordinate system. Do you observe orthogonality? Justify or explain your observations.
+
+
+
+
+\end{enumerate}
+
+
+\end{document}
+\endinput
